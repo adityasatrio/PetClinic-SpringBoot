@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:ddl="http://www.thymeleaf.org/dandelion"
+	xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+	ddl:bundle-includes="bootstrap-3.2.0" lang="en">
+
+<head th:replace="fragments/headTag :: headTag">REPLACE BEFORE
+COMMITTING
+</head>
+
+<style>
+form span {
+	display: block;
+	margin: 10px;
+}
+
+input[type="text"] {
+	border: 1px soild #ccc;
+	width: 200px;
+	padding: 5px;
+}
+
+input[type="submit"] {
+	padding: 5px 15px;
+}
+
+span#result {
+	padding: 5px;
+	background: cyan;
+}
+
+img#loader {
+	display: none;
+}
+</style>
+
+<body role="document" onload="$('input[name=emailAddress]').focus();">
+	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE
+		COMMITTING</div>
+
+	<div class="container">
+
+
+		<form th:object="${email}" method="post" action="resultEmail.html"
+			th:action="@{${#httpServletRequest.servletPath}}"
+			class="form-horizontal" id="email-form">
+
+			<div th:replace="fragments/hiddenErrors :: hiddenErrors">REPLACE
+				BEFORE COMMITTING</div>
+
+			<table class="table table-striped">
+
+				<!--                 	<tr th:classappend="${#fields.hasErrors('emailAddress')} ? 'has-error'"> -->
+				<!--                         <td class="col-sm-1"> -->
+				<!--                             <div class="control-group" th:classappend="${#fields.hasErrors('smtpAuth')} ? 'error'"> -->
+				<!--                                 <label class="control-label">smtpAuth</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                         <td class="col-sm-2"> -->
+				<!--                             <div class="controls"> -->
+				<!--                                 <input type="email" class="form-control" th:field="*{smtpAuth}" disabled="disabled" value="true"/> -->
+				<!--                                 <label class="control-label" th:errors="*{smtpAuth}">[error]</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                     </tr> -->
+
+				<!--                     <tr th:classappend="${#fields.hasErrors('startTls')} ? 'has-error'"> -->
+				<!--                         <td class="col-sm-1"> -->
+				<!--                             <div class="control-group" th:classappend="${#fields.hasErrors('startTls')} ? 'error'"> -->
+				<!--                                 <label class="control-label">startTls</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                         <td class="col-sm-2"> -->
+				<!--                             <div class="controls"> -->
+				<!--                                 <input type="email" class="form-control" th:field="*{startTls}" disabled="disabled" value="true"/> -->
+				<!--                                 <label class="control-label" th:errors="*{startTls}">[error]</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                     </tr> -->
+
+				<!--                     <tr th:classappend="${#fields.hasErrors('smtpHost')} ? 'has-error'"> -->
+				<!--                         <td class="col-sm-1"> -->
+				<!--                             <div class="control-group" th:classappend="${#fields.hasErrors('smtpHost')} ? 'error'"> -->
+				<!--                                 <label class="control-label">smtpHost</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                         <td class="col-sm-2"> -->
+				<!--                             <div class="controls"> -->
+				<!--                                 <input type="email" class="form-control" th:field="*{smtpHost}" disabled="disabled" value="smtp.gmail.com"/> -->
+				<!--                                 <label class="control-label" th:errors="*{smtpHost}">[error]</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                     </tr> -->
+				<!--                     <tr th:classappend="${#fields.hasErrors('smtpPort')} ? 'has-error'"> -->
+				<!--                         <td class="col-sm-1"> -->
+				<!--                             <div class="control-group" th:classappend="${#fields.hasErrors('smtpPort')} ? 'error'"> -->
+				<!--                                 <label class="control-label">smtpPort</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                         <td class="col-sm-2"> -->
+				<!--                             <div class="controls"> -->
+				<!--                                 <input type="email" class="form-control" th:field="*{smtpPort}" disabled="disabled" value="587"/> -->
+				<!--                                 <label class="control-label" th:errors="*{smtpPort}">[error]</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                     </tr> -->
+
+				<!--                     <tr th:classappend="${#fields.hasErrors('emailAddress')} ? 'has-error'"> -->
+				<!--                         <td class="col-sm-1"> -->
+				<!--                             <div class="control-group" th:classappend="${#fields.hasErrors('emailAddress')} ? 'error'"> -->
+				<!--                                 <label class="control-label">Email Address</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                         <td class="col-sm-2"> -->
+				<!--                             <div class="controls"> -->
+				<!--                                 <input type="email" class="form-control" th:field="*{emailAddress}" disabled="disabled"/> -->
+				<!--                                 <label class="control-label" th:errors="*{emailAddress}">[error]</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                     </tr> -->
+
+				<!--                     <tr th:classappend="${#fields.hasErrors('password')} ? 'has-error'"> -->
+				<!--                         <td> -->
+				<!--                             <div class="control-group" th:classappend="${#fields.hasErrors('password')} ? 'error'"> -->
+				<!--                                 <label class="control-label">Password</label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                         <td> -->
+				<!--                             <div class="controls"> -->
+				<!--                                 <input type="password" class="form-control" th:field="*{password}"  disabled="disabled"/> -->
+				<!--                                 <label class="control-label" th:errors="*{password}">[error] </label> -->
+				<!--                             </div> -->
+				<!--                         </td> -->
+				<!--                     </tr> -->
+
+				<tr
+					th:classappend="${#fields.hasErrors('recipientEmail')} ? 'has-error'">
+					<td>
+						<div class="control-group"
+							th:classappend="${#fields.hasErrors('recipientEmail')} ? 'error'">
+							<label class="control-label">Recipient Email</label>
+						</div>
+					</td>
+					<td>
+						<div class="controls">
+							<input type="email" class="form-control"
+								th:field="*{recipientEmail}" /> <label class="control-label"
+								th:errors="*{recipientEmail}">[error]</label>
+						</div>
+					</td>
+				</tr>
+
+				<tr th:classappend="${#fields.hasErrors('subject')} ? 'has-error'">
+					<td>
+						<div class="control-group"
+							th:classappend="${#fields.hasErrors('subject')} ? 'error'">
+							<label class="control-label">Subject</label>
+						</div>
+					</td>
+					<td>
+						<div class="controls">
+							<input type="text" class="form-control" th:field="*{subject}" />
+							<label class="control-label" th:errors="*{subject}">[error]</label>
+						</div>
+					</td>
+				</tr>
+
+				<tr th:classappend="${#fields.hasErrors('contents')} ? 'has-error'">
+					<td>
+						<div class="control-group"
+							th:classappend="${#fields.hasErrors('contents')} ? 'error'">
+							<label class="control-label">Contents</label>
+						</div>
+					</td>
+					<td>
+						<div class="controls">
+							<input type="text" class="form-control" th:field="*{contents}" />
+							<label class="control-label" th:errors="*{contents}">[error]</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<div class="form-actions pull-right">
+							<input type="submit" class="btn btn-success" th:value="SEND" />
+							<label><img id="loader"
+								src="http://dev.cloudcell.co.uk/bin/loading.gif" /></label>
+
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<table th:replace="fragments/footer :: footer" class="footer">REPLACE
+		BEFORE COMMITTING
+	</table>
+</body>
+
+<script type="text/javascript">
+$(document).ready(function (e) {
+    $("form[ajax=true]").submit(function (e) {
+        e.preventDefault();
+        var form_data = $(this).serialize();
+        var form_url = $(this).attr("action");
+        var form_method = $(this).attr("method").toUpperCase();
+        $("#loader").show();
+        $.ajax({
+            url: form_url,
+            type: form_method,
+            data: form_data,
+            cache: false,
+            success: function (returnhtml) {
+                $("#result").html(returnhtml);
+                $("#loader").hide();
+            }
+        });
+    });
+});
+</script>
+
+</html>

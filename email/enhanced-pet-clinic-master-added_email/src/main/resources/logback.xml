@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%-5p: %c - %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- logger name="org.springframework" level="DEBUG"/ -->
+
+	<logger name="sample.ui.aop" level="DEBUG" />
+	<logger name="sample.ui.web.GeneralController" level="DEBUG" />
+
+	<logger name="org.springframework.webflow" level="DEBUG" />
+	<logger name="sample.ui.config.WebFlowConfig" level="DEBUG" />
+	<logger name="sample.ui.service" level="DEBUG" />
+	
+	<logger name="org.springframework.security" level="DEBUG"/>
+	<logger name="org.springframework.security" level="DEBUG"/>
+	<logger name="org.hibernate.tool.hbm2ddl.SchemaExport" level="DEBUG"/>
+	<logger name="org.hibernate.jpa.internal.util.LogHelper" level="DEBUG"/>
+	<logger name="org.hsqldb.jdbc" level="DEBUG"/>
+
+</configuration>
